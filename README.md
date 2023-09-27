@@ -1,6 +1,6 @@
 # Tarea 1 de Optativa I JavaScript
 
-## Enunciado 1 Gestor de Libros:
+## 📚 Enunciado 1 Gestor de Libros:
 
 Crea una clase "Libro" que tenga propiedades como "título", "autor" y "año de publicación". Luego, implementa funciones que permitan agregar, editar y eliminar libros en una lista de libros. Además, desarrolla otra función que permita buscar libros por autor.
 
