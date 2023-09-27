@@ -7,5 +7,10 @@ Crea una clase "Libro" que tenga propiedades como "título", "autor" y "año de 
 ## Listado de archivos.js que conforman la solución:
 
 - [logica.js](logica.js): Fichero donde se encuentran las clases y funciones que dan solución al problema.
-- [pruebas.js](pruebas.js): Fichero donde se encuentran pruebas por consola de la lógica implementada.
-- [utilidades-pruebas.js](utilidades-pruebas.js): Fichero donde se encuentran utilidades para la generación de datos para la realización de las pruebas.
+- [index.js](index.js): Fichero donde se encuentran pruebas por consola de la lógica implementada.
+- [utilidades.js](utilidades.js): Fichero donde se encuentran utilidades para la validación de datos en la lógica y
+  la generación de datos en las pruebas.
+
+> [!NOTE]
+> El archivo [package.json](package.json) se agregó para el correcto funcionamiento de
+> de los imports/exports en node.js
