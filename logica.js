@@ -22,19 +22,19 @@ export class Libro {
 
     // Setters
     this.setTitulo = (titulo) => {
-      if (!validarNoNullUndefined(titulo)) throw "Título no válido";
-      this.titulo = titulo;
+      if (!validarNoNullUndefined(titulo)) throw new Error("Título no válido");
+      _titulo = titulo;
     };
 
     this.setAutor = (autor) => {
-      if (!validarNoNullUndefined(autor)) throw "Autor no válido";
-      this.autor = autor;
+      if (!validarNoNullUndefined(autor)) throw new Error("Autor no válido");
+      _autor = autor;
     };
 
     this.setAnnoPublicacion = (anno_publicacion) => {
       if (!validarNoNullUndefined(anno_publicacion))
-        throw "Año de publicación no válido";
-      this.anno_publicacion = anno_publicacion;
+        throw new Error("Año de publicación no válido");
+      _anno_publicacion = anno_publicacion;
     };
 
     // Setear atributos
@@ -54,14 +54,14 @@ export class Libro {
 /**
  * Permite agregar un libro dado a un listado de libros dado
  *
- * @param {[]} listado_libros
+ * @param {Array} listado_libros
  * @param {Libro} libro
  */
 export function agregarLibro(listado_libros, libro) {
-  if (!validarNoNullUndefined(libro)) throw "Libro no válido";
+  if (!validarNoNullUndefined(libro)) throw new Error("Libro no válido");
 
   if (!validarNoNullUndefined(listado_libros))
-    throw "Listado de libros no válido";
+    throw new Error("Listado de libros no válido");
 
   listado_libros.push(libro);
 }
@@ -69,11 +69,11 @@ export function agregarLibro(listado_libros, libro) {
 /**
  * Permite imprimir un listado de libros dado
  *
- * @param {[]} listado_libros
+ * @param {Array} listado_libros
  */
 export function imprimirListadoLibros(listado_libros) {
   if (!validarNoNullUndefined(listado_libros))
-    throw "Listado de libros no válido";
+    throw new Error("Listado de libros no válido");
 
   for (let libro of listado_libros) libro.imprimir();
 }
@@ -81,76 +81,89 @@ export function imprimirListadoLibros(listado_libros) {
 /**
  * Permite buscar los libros que tengan un autor dado
  *
- * @param {[]} listado_libros Listado de libros fuente
+ * @param {Array} listado_libros Listado de libros fuente
  * @param {string} autor Autor a encontrar
  * @returns Listado de libros encontrados
  */
 export function buscarLibrosAutor(listado_libros, autor) {
   if (!validarNoNullUndefined(listado_libros))
-    throw "Listado de libros no válido";
-  if (!validarNoNullUndefined(autor)) throw "Autor no válido";
+    throw new Error("Listado de libros no válido");
+  if (!validarNoNullUndefined(autor)) throw new Error("Autor no válido");
 
   return listado_libros.filter((libro) => libro.getAutor() === autor);
 }
 
 /**
  * Permite eliminar un libro dado su identificador.
- * @param {[]} listado_libros
+ * @param {Array} listado_libros
  * @param {number} id_libro
  */
 export function eliminarLibro(listado_libros, id_libro) {
   if (!validarNoNullUndefined(listado_libros))
-    throw "Listado de libros no válido";
-  if (!validarNoNullUndefined(id_libro)) throw "Identificador no válido";
+    throw new Error("Listado de libros no válido");
+  if (!validarNoNullUndefined(id_libro))
+    throw new Error("Identificador no válido");
 
   listado_libros.splice(buscarLibro(listado_libros, id_libro), 1);
 }
 
 /**
  * Permite encontrar un libro dado su identificador.
- * @param {[]} listado_libros Listado de libros fuente
+ * @param {Array} listado_libros Listado de libros fuente
  * @param {number} id_libro Identificador del libro a encontrar
  * @returns Índice del libro encontrado o -1 si no se encontró
  */
 function buscarLibro(listado_libros, id_libro) {
   let indice = -1;
-  let encontrado = false;
 
-  for (let i = 0; i < listado_libros.length && !encontrado; i++) {
+  for (let i = 0; i < listado_libros.length && indice == -1; i++) {
     if (listado_libros[i].getId() === id_libro) {
-      encontrado = true;
       indice = i;
     }
   }
 
-  if (!encontrado) throw "Identificador no existente";
+  if (indice == -1) throw new Error("Identificador no existente");
 
   return indice;
 }
 
+/**
+ * Permite modificar el título de un libro
+ *
+ * @param {Array} listado_libros Listado de libros fuente
+ * @param {number} id_libro Identificador del libro a encontrar
+ * @param {string} titulo Título nuevo
+ */
 export function editarTituloLibro(listado_libros, id_libro, titulo) {
-  if (!validarNoNullUndefined(titulo)) throw "Título no válido";
-  buscarLibro(listado_libros, id_libro).setTitulo(titulo);
+  if (!validarNoNullUndefined(titulo)) throw new Error("Título no válido");
+  listado_libros[buscarLibro(listado_libros, id_libro)].setTitulo(titulo);
 }
 
+/**
+ * Permite modificar el autor de un libro
+ * @param {Array} listado_libros Listado de libros fuente
+ * @param {number} id_libro Identificador del libro a encontrar
+ * @param {string} autor Autor nuevo
+ */
 export function editarAutorLibro(listado_libros, id_libro, autor) {
-  if (!validarNoNullUndefined(autor)) throw "Autor no válido";
-  buscarLibro(listado_libros, id_libro).setAutor(autor);
+  if (!validarNoNullUndefined(autor)) throw new Error("Autor no válido");
+  listado_libros[buscarLibro(listado_libros, id_libro)].setAutor(autor);
 }
 
+/**
+ * Permite modificar el año de publicación de un libro
+ * @param {Array} listado_libros Listado de libros fuente
+ * @param {number} id_libro Identificador del libro a encontrar
+ * @param {number} anno_publicacion Año de publicación
+ */
 export function editarAnnoPublicacionLibro(
   listado_libros,
   id_libro,
   anno_publicacion
 ) {
   if (!validarNoNullUndefined(anno_publicacion))
-    throw "Año de publicación no válido";
-  buscarLibro(listado_libros, id_libro).setAnnoPublicacion(anno_publicacion);
+    throw new Error("Año de publicación no válido");
+  listado_libros[buscarLibro(listado_libros, id_libro)].setAnnoPublicacion(
+    anno_publicacion
+  );
 }
-
-let a = [];
-agregarLibro(a, new Libro("a", "a", 2002));
-agregarLibro(a, new Libro("b", "ab", 2003));
-imprimirListadoLibros(buscarLibrosAutor(a, "a"));
-eliminarLibro(a, a[0].getId());
-imprimirListadoLibros(a);

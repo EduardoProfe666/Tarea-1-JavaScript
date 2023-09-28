@@ -8,8 +8,7 @@ Crea una clase "Libro" que tenga propiedades como "título", "autor" y "año de 
 
 - [logica.js](logica.js): Fichero donde se encuentran las clases y funciones que dan solución al problema.
 - [index.js](index.js): Fichero donde se encuentran pruebas por consola de la lógica implementada.
-- [utilidades.js](utilidades.js): Fichero donde se encuentran utilidades para la validación de datos en la lógica y
-  la generación de datos en las pruebas.
+- [utilidades.js](utilidades.js): Fichero donde se encuentran utilidades para la lógica
 
 > [!NOTE]
 > El archivo [package.json](package.json) se agregó para el correcto funcionamiento de
