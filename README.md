@@ -6,9 +6,9 @@ Crea una clase "Libro" que tenga propiedades como "título", "autor" y "año de 
 
 ## Listado de archivos.js que conforman la solución:
 
-- [logica.js](/logica.js): Fichero donde se encuentran las clases y funciones que dan solución al problema.
+- [logica.js](/logica.js): Fichero donde se encuentran las clases que dan solución al problema.
 - [index.js](index.js): Fichero donde se encuentran pruebas por consola de la lógica implementada.
-- [utilidades.js](utilidades.js): Fichero donde se encuentran utilidades para la lógica
+- [utilidades.js](utilidades.js): Fichero donde se encuentran utilidades para la lógica.
 
 > [!NOTE]
 > El archivo [package.json](package.json) se agregó para el correcto funcionamiento de
