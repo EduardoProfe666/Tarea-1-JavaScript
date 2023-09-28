@@ -1,16 +1,7 @@
-import {
-  Libro,
-  agregarLibro,
-  eliminarLibro,
-  imprimirListadoLibros,
-  buscarLibrosAutor,
-  editarAnnoPublicacionLibro,
-  editarAutorLibro,
-  editarTituloLibro,
-} from "./logica.js";
+import { Libro, Biblioteca } from "./logica.js";
 
 //---------------- Declaración de variables -------------------//
-let libros = [];
+let biblioteca = new Biblioteca();
 let l1 = new Libro("Lib 1", "Juan", 2002);
 let l2 = new Libro("Lib 2", "Juan", 2003);
 let l3 = new Libro("Lib 3", "Pedro", 2004);
@@ -19,46 +10,45 @@ let l5 = new Libro("Lib 5", "Lilian", 2003);
 
 //---------------- Pruebas -------------------//
 console.log("\nPrueba de correcta agregación: ");
-agregarLibro(libros, l1);
-agregarLibro(libros, l2);
-agregarLibro(libros, l3);
-agregarLibro(libros, l4);
-agregarLibro(libros, l5);
-imprimirListadoLibros(libros);
+biblioteca.agregarLibro(l1);
+biblioteca.agregarLibro(l2);
+biblioteca.agregarLibro(l3);
+biblioteca.agregarLibro(l4);
+biblioteca.agregarLibro(l5);
+biblioteca.imprimirListadoLibros();
 
-// Prueba con de edición de l3
 console.log("\nPrueba de correcta edición de autor");
 console.log("Antes:");
-libros[2].imprimir();
+biblioteca.getListadoLibros()[2].imprimir();
 console.log("Después:");
-editarAutorLibro(libros, l3.getId(), "José");
-libros[2].imprimir();
+biblioteca.editarAutorLibro(l3.getId(), "José");
+biblioteca.getListadoLibros()[2].imprimir();
 
 console.log("\nPrueba de correcta edición de título");
 console.log("Antes:");
-libros[3].imprimir();
+biblioteca.getListadoLibros()[3].imprimir();
 console.log("Después:");
-editarTituloLibro(libros, l4.getId(), "Libro G");
-libros[3].imprimir();
+biblioteca.editarTituloLibro(l4.getId(), "Libro G");
+biblioteca.getListadoLibros()[3].imprimir();
 
 console.log("\nPrueba de correcta edición de año de publicación");
 console.log("Antes:");
-libros[4].imprimir();
+biblioteca.getListadoLibros()[4].imprimir();
 console.log("Después:");
-editarAnnoPublicacionLibro(libros, l5.getId(), 2010);
-libros[4].imprimir();
+biblioteca.editarAnnoPublicacionLibro(l5.getId(), 2010);
+biblioteca.getListadoLibros()[4].imprimir();
 
 console.log("\nPrueba de correcta eliminación de libro");
 console.log("Antes:");
-imprimirListadoLibros(libros);
+biblioteca.imprimirListadoLibros();
 console.log("Después de eliminar Libro con id->" + l4.getId() + ":");
-eliminarLibro(libros, l4.getId());
-imprimirListadoLibros(libros);
+biblioteca.eliminarLibro(l4.getId());
+biblioteca.imprimirListadoLibros();
 
 console.log("\nPrueba de correcta búsqueda de libros por autor");
 console.log("Libros del autor Juan:");
-imprimirListadoLibros(buscarLibrosAutor(libros, "Juan"));
+Biblioteca.imprimirListadoLibros(biblioteca.buscarLibrosAutor("Juan"));
 console.log("Libros del autor Lilian:");
-imprimirListadoLibros(buscarLibrosAutor(libros, "Lilian"));
+Biblioteca.imprimirListadoLibros(biblioteca.buscarLibrosAutor("Lilian"));
 
 console.log("\n");
