@@ -10,6 +10,6 @@ Crea una clase "Libro" que tenga propiedades como "título", "autor" y "año de 
 - [index.js](index.js): Fichero donde se encuentran pruebas por consola de la lógica implementada.
 - [utilidades.js](utilidades.js): Fichero donde se encuentran utilidades para la lógica.
 
-> [!NOTE]
+> [!NOTA]
 > El archivo [package.json](https://github.com/EduardoProfe666/Tarea-1-JavaScript/blob/main/package.json) se agregó para el correcto funcionamiento de
 > de los imports/exports en node.js
