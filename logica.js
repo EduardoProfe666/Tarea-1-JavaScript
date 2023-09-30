@@ -22,17 +22,22 @@ export class Libro {
 
     // Setters
     this.setTitulo = (titulo) => {
-      if (!validarNoNullUndefined(titulo)) throw new Error("Título no válido");
+      if (!validarNoNullUndefined(titulo) || typeof titulo !== "string")
+        throw new Error("Título no válido");
       _titulo = titulo;
     };
 
     this.setAutor = (autor) => {
-      if (!validarNoNullUndefined(autor)) throw new Error("Autor no válido");
+      if (!validarNoNullUndefined(autor) || typeof autor !== "string")
+        throw new Error("Autor no válido");
       _autor = autor;
     };
 
     this.setAnnoPublicacion = (anno_publicacion) => {
-      if (!validarNoNullUndefined(anno_publicacion))
+      if (
+        !validarNoNullUndefined(anno_publicacion) ||
+        typeof anno_publicacion !== "number"
+      )
         throw new Error("Año de publicación no válido");
       _anno_publicacion = anno_publicacion;
     };
@@ -64,7 +69,8 @@ export class Biblioteca {
    * @param {Libro} libro
    */
   agregarLibro(libro) {
-    if (!validarNoNullUndefined(libro)) throw new Error("Libro no válido");
+    if (!validarNoNullUndefined(libro) || !(libro instanceof Libro))
+      throw new Error("Libro no válido");
     this.getListadoLibros().push(libro);
   }
 
@@ -79,7 +85,10 @@ export class Biblioteca {
    * Permite imprimir el listado de libros dado
    */
   static imprimirListadoLibros(listado_libros) {
-    if (!validarNoNullUndefined(listado_libros))
+    if (
+      !validarNoNullUndefined(listado_libros) ||
+      !(listado_libros instanceof Array)
+    )
       throw new Error("Listado no válido");
     for (let libro of listado_libros) libro.imprimir();
   }
@@ -91,7 +100,8 @@ export class Biblioteca {
    * @returns Listado de libros encontrados
    */
   buscarLibrosAutor(autor) {
-    if (!validarNoNullUndefined(autor)) throw new Error("Autor no válido");
+    if (!validarNoNullUndefined(autor) || typeof autor !== "string")
+      throw new Error("Autor no válido");
 
     return this.getListadoLibros().filter(
       (libro) => libro.getAutor() === autor
@@ -103,7 +113,7 @@ export class Biblioteca {
    * @param {number} id_libro
    */
   eliminarLibro(id_libro) {
-    if (!validarNoNullUndefined(id_libro))
+    if (!validarNoNullUndefined(id_libro) || typeof id_libro !== "number")
       throw new Error("Identificador no válido");
 
     this.getListadoLibros().splice(this.buscarLibro(id_libro), 1);
@@ -115,6 +125,8 @@ export class Biblioteca {
    * @returns Índice del libro encontrado o -1 si no se encontró
    */
   buscarLibro(id_libro) {
+    if (!validarNoNullUndefined(id_libro) || typeof id_libro !== "number")
+      throw new Error("Identificador no válido");
     let indice = -1;
 
     for (let i = 0; i < this.getListadoLibros().length && indice == -1; i++) {
@@ -134,7 +146,10 @@ export class Biblioteca {
    * @param {string} titulo Título nuevo
    */
   editarTituloLibro(id_libro, titulo) {
-    if (!validarNoNullUndefined(titulo)) throw new Error("Título no válido");
+    if (!validarNoNullUndefined(id_libro) || typeof id_libro !== "number")
+      throw new Error("Identificador no válido");
+    if (!validarNoNullUndefined(titulo) || typeof titulo !== "string")
+      throw new Error("Título no válido");
     this.getListadoLibros()[this.buscarLibro(id_libro)].setTitulo(titulo);
   }
 
@@ -144,7 +159,10 @@ export class Biblioteca {
    * @param {string} autor Autor nuevo
    */
   editarAutorLibro(id_libro, autor) {
-    if (!validarNoNullUndefined(autor)) throw new Error("Autor no válido");
+    if (!validarNoNullUndefined(id_libro) || typeof id_libro !== "number")
+      throw new Error("Identificador no válido");
+    if (!validarNoNullUndefined(autor) || typeof autor !== "string")
+      throw new Error("Autor no válido");
     this.getListadoLibros()[this.buscarLibro(id_libro)].setAutor(autor);
   }
 
@@ -154,7 +172,12 @@ export class Biblioteca {
    * @param {number} anno_publicacion Año de publicación
    */
   editarAnnoPublicacionLibro(id_libro, anno_publicacion) {
-    if (!validarNoNullUndefined(anno_publicacion))
+    if (!validarNoNullUndefined(id_libro) || typeof id_libro !== "number")
+      throw new Error("Identificador no válido");
+    if (
+      !validarNoNullUndefined(anno_publicacion) ||
+      typeof anno_publicacion !== "number"
+    )
       throw new Error("Año de publicación no válido");
     this.getListadoLibros()[this.buscarLibro(id_libro)].setAnnoPublicacion(
       anno_publicacion
