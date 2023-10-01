@@ -1,5 +1,8 @@
 import { validarNoNullUndefined } from "./utilidades.js";
 
+/**
+ * Clase que permite modelar un libro
+ */
 export class Libro {
   /**
    * Constructor de Libro. El identificador es autogenerado.
@@ -55,6 +58,9 @@ export class Libro {
   }
 }
 
+/**
+ * Clase que permite modelar el listado de libros
+ */
 export class Biblioteca {
   constructor() {
     let listado_libros = [];
@@ -69,7 +75,11 @@ export class Biblioteca {
    * @param {Libro} libro
    */
   agregarLibro(libro) {
-    if (!validarNoNullUndefined(libro) || !(libro instanceof Libro))
+    if (
+      !validarNoNullUndefined(libro) ||
+      !(libro instanceof Libro) ||
+      this.getListadoLibros().includes(libro)
+    )
       throw new Error("Libro no válido");
     this.getListadoLibros().push(libro);
   }
